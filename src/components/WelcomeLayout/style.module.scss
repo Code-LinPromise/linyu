@@ -21,17 +21,17 @@
     >.action{
         display: flex;
         position: fixed;
-        left: 0;
-        bottom: 0;
+        left: 0px;
+        bottom: 0px;
         width: 100%;
         justify-content: space-between;
         align-items: center;
-        font-size: 32px;
+        font-size: 24px;
         color: var(--welcome-text);
-        padding:0  24px;
+        padding:0  16px;
         font-weight: 700;
         background-color: var(--welcome-bg-end);
-        height: var(--welcome-nav-height);
+        height: calc(var(--welcome-nav-height) + 1px);
         z-index: var(--z-index-bottom-nav);
         padding-bottom: var(--welcome-nav-gap);
         >.fake{
