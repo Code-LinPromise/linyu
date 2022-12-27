@@ -2,6 +2,7 @@
     flex-grow: 1;
     display: flex;
     flex-flow: column;
+    padding-bottom: var(--welcome-nav-gap);
     >.card{
         flex-grow: 1;
         background-color: var(--welcome-color-bg);
@@ -19,13 +20,20 @@
     }
     >.action{
         display: flex;
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
         justify-content: space-between;
         align-items: center;
         font-size: 32px;
         color: var(--welcome-text);
-        margin: 0 16px;
+        padding:0  24px;
         font-weight: 700;
-        padding: 24px 0;
+        background-color: var(--welcome-bg-end);
+        height: var(--welcome-nav-height);
+        z-index: var(--z-index-bottom-nav);
+        padding-bottom: var(--welcome-nav-gap);
         >.fake{
             visibility: hidden;
         }
