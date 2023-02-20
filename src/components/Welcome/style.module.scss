@@ -11,7 +11,7 @@
         display: flex;
         flex-flow: column;
         align-items: center;
-        >.img{
+        >svg{
             width: 64px;
             height: 68px;
         }
@@ -27,6 +27,7 @@
         flex-direction: column;
         position: relative;
         margin: 16px 16px var(--welcome-nav-gap);
+        
     }
     >.footer{
         flex-shrink: 0;
