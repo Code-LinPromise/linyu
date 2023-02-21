@@ -1,10 +1,19 @@
-import { computed, onMounted,Ref,ref } from "vue";
+import { computed, onMounted,onUnmounted,Ref,ref } from "vue";
 
 type Point={
     x:number,
     y:number
 }
-export const useSwipe=(element:Ref<HTMLElement | null>)=>{
+
+interface Options{
+    beforeStart?:(e:TouchEvent)=> void
+    beforeMove?:(e:TouchEvent)=> void
+    beforeEnd?:(e:TouchEvent)=> void
+    afterStart?:(e:TouchEvent)=> void
+    afterMove?:(e:TouchEvent)=> void
+    afterEnd?:(e:TouchEvent)=> void
+}
+export const useSwipe=(element:Ref<HTMLElement | undefined>,options?:Options)=>{
     const start =ref<Point>()
     const end =ref<Point>()
     const swipeing=ref(false)
@@ -28,24 +37,37 @@ export const useSwipe=(element:Ref<HTMLElement | null>)=>{
             return y>0? "down" : "up"
         }
     })
+    const onStart=(e:TouchEvent)=>{
+        options?.beforeStart?.(e)
+        start.value={
+            x:e.touches[0].clientX,
+            y:e.touches[0].clientY
+        }
+        options?.afterStart?.(e)
+    }
+    const onMove=(e:TouchEvent)=>{
+        options?.beforeMove?.(e)
+        end.value={
+            x:e.touches[0].clientX,
+            y:e.touches[0].clientY
+        }
+        swipeing.value=true
+        options?.afterMove?.(e)
+    }
+    const onEnd=(e:TouchEvent)=>{
+        options?.beforeEnd?.(e)
+        swipeing.value=false
+        options?.afterEnd?.(e)
+    }
     onMounted(()=>{
-        element.value?.addEventListener("touchstart",e=>{
-            start.value={
-                x:e.touches[0].clientX,
-                y:e.touches[0].clientY
-            }
-        })
-        element.value?.addEventListener("touchmove",e=>{
-            end.value={
-                x:e.touches[0].clientX,
-                y:e.touches[0].clientY
-            }
-            swipeing.value=true
-        })
-        element.value?.addEventListener("touchend",e=>{
-        
-            swipeing.value=false
-        })
+        element.value?.addEventListener("touchstart",onStart)
+        element.value?.addEventListener("touchmove",onMove)
+        element.value?.addEventListener("touchend",onEnd)
+    })
+    onUnmounted(()=>{
+        element.value?.removeEventListener("touchstart",onStart)
+        element.value?.removeEventListener("touchmove",onMove)
+        element.value?.removeEventListener("touchend",onEnd)
     })
 
     return {

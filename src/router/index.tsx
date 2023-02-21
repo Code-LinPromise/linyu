@@ -22,10 +22,10 @@ export const routes:RouteRecordRaw[]=[
         path:"/welcome",component:Welcome,
         children:[
             {path:"",redirect:"/welcome/1"},
-            {path:"1",components:{main:Welcome1,footer:WelcomeAction1}},
-            {path:"2",components:{main:Welcome2,footer:WelcomeAction2}},
-            {path:"3",components:{main:Welcome3,footer:WelcomeAction3}},
-            {path:"4",components:{main:Welcome4,footer:WelcomeAction4}},
+            {path:"1",name:"welcome1",components:{main:Welcome1,footer:WelcomeAction1}},
+            {path:"2",name:"welcome2",components:{main:Welcome2,footer:WelcomeAction2}},
+            {path:"3",name:"welcome3",components:{main:Welcome3,footer:WelcomeAction3}},
+            {path:"4",name:"welcome4",components:{main:Welcome4,footer:WelcomeAction4}},
         ]
     }
 ]

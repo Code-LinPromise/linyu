@@ -1,14 +1,31 @@
 import { defineComponent, Transition, VNode,ref, watchEffect } from 'vue';
-import {RouteLocationNormalizedLoaded, RouterView} from "vue-router"
+import {RouteLocationNormalizedLoaded, RouterView,useRoute,useRouter} from "vue-router"
 import s from "./style.module.scss"
 import { useSwipe } from '../../hooks/useSwipe';
+import { throttle } from '../../shared/throttle';
 
 export const Welcome = defineComponent({
   setup: (props, context) => {
-    const main =ref<HTMLElement | null>(null)
-    const {direction} =useSwipe(main)
+    const main =ref<HTMLElement>()
+    const {swipeing,direction}=useSwipe(main,{
+        beforeStart:e=>e.preventDefault()
+    })
+    const pushMap:Record<string,string>={
+        'welcome1':'/welcome/2',
+        'welcome2':'/welcome/3',
+        'welcome3':'/welcome/4',
+        'welcome4':'/start'
+    }
+    const route=useRoute()
+    const router=useRouter()
+    const push=throttle(()=>{
+        const name=(route.name || 'welcome1').toString()
+        router.push(pushMap[name])
+    },500)
     watchEffect(()=>{
-        console.log(direction.value)
+        if(swipeing.value && direction.value === 'left'){
+            push()
+        }
     })
     return () => (
     <div class={s.wrapper}>
@@ -18,7 +35,7 @@ export const Welcome = defineComponent({
             </svg>
             <h1 class={s.font}>山竹记账</h1>
         </header>
-        <main class={s.main} ref={main}>
+        <main class={s.main} ref={main} >
             <RouterView name='main'>
                 {
                     ({Component:X,route:R}: { Component: VNode, route: RouteLocationNormalizedLoaded })=>
