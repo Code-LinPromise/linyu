@@ -19,7 +19,7 @@ export const Welcome = defineComponent({
     const route=useRoute()
     const router=useRouter()
     const push=throttle(()=>{
-        const name=(route.name || 'welcome1').toString()
+        const name=(route.name || 'welcome1').toString() 
         router.push(pushMap[name])
     },500)
     watchEffect(()=>{
