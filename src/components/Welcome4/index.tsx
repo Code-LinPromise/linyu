@@ -1,4 +1,5 @@
 
+import { Icon } from "../Icon"
 import {WelcomeLayout} from "../WelcomeLayout"
 export const Welcome4 = () => {
     return () => (
@@ -6,9 +7,8 @@ export const Welcome4 = () => {
             {{
                 icon:()=>{
                     return (
-                    <svg >
-                        <use xlinkHref='#cloud'></use>
-                    </svg>
+                        <Icon name="cloud"></Icon>
+                
                     )
                 },
                 title:()=><h2>云备份<br />再也不怕数据丢失</h2>,

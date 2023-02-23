@@ -3,6 +3,7 @@ import {RouteLocationNormalizedLoaded, RouterView,useRoute,useRouter} from "vue-
 import s from "./style.module.scss"
 import { useSwipe } from '../../hooks/useSwipe';
 import { throttle } from '../../shared/throttle';
+import { Icon } from '../Icon';
 
 export const Welcome = defineComponent({
   setup: (props, context) => {
@@ -30,9 +31,7 @@ export const Welcome = defineComponent({
     return () => (
     <div class={s.wrapper}>
         <header class={s.header}>
-            <svg >
-                <use xlinkHref='#mangosteen'></use>
-            </svg>
+            <Icon name="mangosteen"></Icon>
             <h1 class={s.font}>山竹记账</h1>
         </header>
         <main class={s.main} ref={main} >
