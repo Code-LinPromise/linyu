@@ -3,7 +3,8 @@ import s from './style.module.scss';
 export const Icon = defineComponent({
   props: {
     name: {
-      type: String as PropType<'add' | "chart" | "clock" | "cloud" | "mangosteen" | "piggy">
+      type: String as PropType<'add' | "chart" | "clock" | "cloud" |
+                             "mangosteen" | "piggy" | "menu">
     }
   },
   setup: (props, context) => {
