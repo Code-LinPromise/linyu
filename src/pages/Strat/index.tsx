@@ -1,18 +1,27 @@
-import { defineComponent } from 'vue';
+import { defineComponent,ref } from 'vue';
 import { Button } from '../../components/Button';
 import { FloatButton } from '../../components/FloatButton';
 import s from "./style.module.scss"
 import { Center } from '../../components/Center';
 import { Icon } from '../../components/Icon';
 import { NavBar } from '../../components/NavBar';
+import { Overlay } from '../../components/Overlay';
 export const Start = defineComponent({
+    
   setup: (props, context) => {
+    const isShow=ref(false)
+    const setOverlay=()=>{
+        isShow.value=!isShow.value
+    }
+    const closeOverlay=()=>{
+        isShow.value=false
+    }
     return () => (
     <div>
         <menu>
             <NavBar class={s.menu}>
                 {{
-                    icon:()=> <Icon name="menu" class={s.menuIcon}></Icon>,
+                    icon:()=> <Icon name="menu" class={s.menuIcon} onClick={setOverlay}></Icon>,
                     title:()=> <span class={s.menuFont}>山竹记账</span>
                 }}
             </NavBar></menu>
@@ -22,7 +31,7 @@ export const Start = defineComponent({
         <div class={s.box}>
                 <Button class={s.button}>开始记账</Button>
         </div>
-        
+        {isShow.value && <Overlay close={closeOverlay}></Overlay>}
         <FloatButton></FloatButton>
     </div>
     )

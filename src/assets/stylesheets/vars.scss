@@ -4,7 +4,8 @@
     --welcome-bg-start:#5d33be;
     --welcome-bg-end:#8f4cd7;
     --welcome-nav-height:64px;
-    --z-index-bottom-nav:10;
+    --z-index-bottom-nav:8;
+    --z-index-overlay-mask:16;
     --welcome-nav-gap:8px;
     --transtion-duration:0.5s;
     --button-bg:#5C33BE;
@@ -15,4 +16,7 @@
     --float-button-text:white;
     --float-button-bg:var(--button-bg);
     --navbar-text-color:white;
+    --overlay-mask-bg:rgba(0,0,0,0.5);
+    --overlay-bg:white;
+    --top-safe-area-height:24px
   }

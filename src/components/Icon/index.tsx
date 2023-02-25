@@ -3,14 +3,18 @@ import s from './style.module.scss';
 export const Icon = defineComponent({
   props: {
     name: {
-      type: String as PropType<'add' | "chart" | "clock" | "cloud" |
-                             "mangosteen" | "piggy" | "menu">
-    }
+        type: String as PropType<'add' | "chart" | "clock" | "cloud" |
+                             "mangosteen" | "piggy" | "menu" |"charts" |"classification"
+                             |"export" |"notify">,
+        require:true
+    },
+    onClick:{
+        type:Function as PropType<(e:MouseEvent)=>void>
+    }
   },
   setup: (props, context) => {
-    props:["name"]
     return () => (
-        <svg class={s.svg}  >
+        <svg class={s.svg} onClick={props.onClick}>
             <use xlinkHref={`#${props.name}`}></use>
         </svg>
     )
