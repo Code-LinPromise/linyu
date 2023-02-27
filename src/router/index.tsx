@@ -10,6 +10,9 @@ import { WelcomeAction2 } from "../components/WelcomeAction2"
 import { WelcomeAction3 } from "../components/WelcomeAction3"
 import { WelcomeAction4 } from "../components/WelcomeAction4"
 import { Start } from "../pages/Strat"
+import { ItemCreate } from "../components/Item/ItemCreate"
+import { ItemList } from "../components/Item/ItemList"
+import { ItemPage } from "../pages/ItemPage"
 
 export const routes:RouteRecordRaw[]=[
     {
@@ -26,6 +29,13 @@ export const routes:RouteRecordRaw[]=[
             {path:"2",name:"welcome2",components:{main:Welcome2,footer:WelcomeAction2}},
             {path:"3",name:"welcome3",components:{main:Welcome3,footer:WelcomeAction3}},
             {path:"4",name:"welcome4",components:{main:Welcome4,footer:WelcomeAction4}},
+        ]
+    },
+    {
+        path:"/item" ,component:ItemPage,
+        children:[
+            {path:"list",component:ItemList},
+            {path:"create",components:ItemCreate}
         ]
     }
 ]
