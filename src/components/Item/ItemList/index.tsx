@@ -17,7 +17,7 @@ export const ItemList = defineComponent({
           icon: () => <Icon name="left" class={s.menuIcon}></Icon>,
           title: () => <span class={s.menuFont}>记一笔</span>,
           default: () => (
-              <Tabs selected={refKind.value} onUpdateSelected={onUpdateSelected}>
+              <Tabs v-model:selected={refKind.value}>
                 <Tab name="收入"></Tab>
                 <Tab name="支出"></Tab>
               </Tabs>
