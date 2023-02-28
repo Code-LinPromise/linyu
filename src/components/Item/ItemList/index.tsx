@@ -1,14 +1,18 @@
 import { defineComponent, PropType } from 'vue';
+import { MainLayout } from '../../../layouts/MainLayout';
+import { Icon } from '../../Icon';
 import s from './style.module.scss';
 export const ItemList = defineComponent({
-  props: {
-    name: {
-      type: String as PropType<string>
-    }
-  },
+  
   setup: (props, context) => {
     return () => (
-      <div class={s.wrapper}>hi item list</div>
+            <MainLayout>
+                {{
+                    icon:()=><Icon name='left' class={s.menuIcon}></Icon>,
+                    title:()=><span class={s.menuFont}>记一笔</span>,
+                    default:()=>"hi"
+                }}
+            </MainLayout>
     )
   }
 })
