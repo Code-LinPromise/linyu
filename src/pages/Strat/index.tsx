@@ -6,15 +6,20 @@ import { Center } from '../../components/Center';
 import { Icon } from '../../components/Icon';
 import { Overlay } from '../../components/Overlay';
 import { MainLayout } from '../../layouts/MainLayout';
+import { useRouter } from 'vue-router';
 export const Start = defineComponent({
     
   setup: (props, context) => {
     const isShow=ref(false)
+    const router =useRouter()
     const setOverlay=()=>{
         isShow.value=!isShow.value
     }
     const closeOverlay=()=>{
         isShow.value=false
+    }
+    const goItemCreate=()=>{
+        router.push("/item/create")
     }
     return () => (
       <div>
@@ -33,7 +38,7 @@ export const Start = defineComponent({
                   <Button class={s.button}>开始记账</Button>
                 </div>
                 {isShow.value && <Overlay close={closeOverlay}></Overlay>}
-                <FloatButton></FloatButton>
+                <FloatButton goItemCreate={goItemCreate}></FloatButton>
               </>
             ),
           }}
