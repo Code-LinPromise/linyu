@@ -5,7 +5,7 @@ export const Icon = defineComponent({
     name: {
         type: String as PropType<'add' | "chart" | "clock" | "cloud" |
                              "mangosteen" | "piggy" | "menu" |"charts" |"classification"
-                             |"export" |"notify" |"left" |"notes">,
+                             |"export" |"notify" |"left" |"notes" |"date">,
         require:true
     },
     onClick:{
