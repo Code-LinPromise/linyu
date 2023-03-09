@@ -1,6 +1,7 @@
-import { defineComponent, PropType } from 'vue';
+import { defineComponent, PropType, ref } from 'vue';
 import { Icon } from '../Icon';
 import s from './style.module.scss';
+import { DatetimePicker, NumberKeyboard, Popup } from 'vant';
 export const InputPad = defineComponent({
     props:{
         name:{
@@ -23,13 +24,23 @@ export const InputPad = defineComponent({
         { text: '清空', onClick: () => { }},
         { text: '提交', onClick: () => { } },
     ]
+    const refDatePickerVisible = ref(true)
+    const showDatePicker = () => refDatePickerVisible.value = true
+    const hideDatePicker = () => refDatePickerVisible.value = false
+    const setDate = (date: Date) => { refDate.value = date; hideDatePicker() }
+    const refDate=ref()
     return ()=>(
         <div class={s.wrapper}>
             <div class={s.timeAndAmount}>
-                <span class={s.iconAndTime}>
+                <span class={s.iconAndTime} onClick={showDatePicker}>
                     <Icon name="date" class={s.dateIcon}></Icon>
                     <span class={s.time}>time</span>
                 </span>
+                <Popup position='bottom' v-model:show={refDatePickerVisible.value}>
+                    <DatetimePicker value={refDate.value} type="date" title="选择年月日"
+                        onConfirm={setDate} onCancel={hideDatePicker}
+                    />
+                </Popup>
                 <span class={s.amount}>0.00</span>
             </div>
             <div class={s.buttons}>
@@ -37,7 +48,6 @@ export const InputPad = defineComponent({
                     return <button onClick={item.onClick}>{item.text}</button>
                 })}
             </div>
-
         </div>
     )
 }

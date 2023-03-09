@@ -40,7 +40,7 @@ export const Start = defineComponent({
                 {isShow.value && <Overlay close={closeOverlay}></Overlay>}
                 <FloatButton goItemCreate={goItemCreate}></FloatButton>
               </>
-            ),
+            )
           }}
         </MainLayout>
       </div>
