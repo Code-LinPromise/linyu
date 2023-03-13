@@ -1,0 +1,16 @@
+.icon{
+    display: flex;
+    width: 30px;
+    height: 30px;
+    fill: var(--navbar-text-color);
+    align-items: center;
+    justify-content: start;
+    position: relative;
+    top: 1px;
+    
+}
+.font{
+    color: var(--navbar-text-color);
+    font-size: 24px;
+    margin-left: 12px;
+}
