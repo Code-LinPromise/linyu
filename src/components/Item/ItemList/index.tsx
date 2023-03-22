@@ -17,7 +17,7 @@ export const ItemList = defineComponent({
                 icon:()=><Icon name="menu" class={s.icon}></Icon>,
                 title:()=><span class={s.font}>山竹记账</span>,
                 default: () => (
-                    <Tabs v-model:selected={refSelected.value}>
+                    <Tabs v-model:selected={refSelected.value} classPrefix={'customTabs'}>
                         <Tab name='本月'>1</Tab>
                         <Tab name='上月'>2</Tab>
                         <Tab name='今年'>3</Tab>
