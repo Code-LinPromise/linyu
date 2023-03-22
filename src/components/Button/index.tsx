@@ -3,14 +3,17 @@ import s from "./style.module.scss"
 export const Button = defineComponent({
     props:{
         onClick:{
-            type:Function as PropType<(e:MouseEvent)=>void>
-            
+            type:Function as PropType<(e:MouseEvent)=>void>    
+        },
+        level:{
+            type:String as PropType<"important" | "default" | "danger">,
+            default: 'important'
         }
     },
   setup: (props, context) => {
     
     return () => (
-    <button class={s.button}>{context.slots.default?.()}</button>  
+    <button class={[s.button,s[props.level]]}>{context.slots.default?.()}</button>  
 )
   }
 })

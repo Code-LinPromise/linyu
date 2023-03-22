@@ -5,8 +5,8 @@ export const MainLayout = defineComponent({
   setup: (props, context) => {
     
     return () =>(
-    <>
-        <NavBar>
+    <div class={s.wrapper}>
+        <NavBar class={s.navbar}>
             {
                 {
                     title:()=>context.slots.title?.(),
@@ -17,7 +17,7 @@ export const MainLayout = defineComponent({
         {
             context.slots.default?.()
         }
-    </>
+    </div>
 
   )
 }
