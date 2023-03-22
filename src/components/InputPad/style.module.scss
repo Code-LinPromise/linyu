@@ -3,6 +3,7 @@
     bottom: 0px;
     left: 0;
     width: 100%;
+    
     >.timeAndAmount{
             display: flex;
             justify-content: space-between;
@@ -10,6 +11,7 @@
             padding: 16px;
             font-family: monospace;
             border-top: 1px solid var(--button-border-color);
+            background-color: white;
         >.iconAndTime{
             display: flex;
             justify-content: space-between;
