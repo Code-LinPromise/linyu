@@ -1,4 +1,8 @@
 :root {
+    --total-bg: #252A43;
+    --total-text: white;
+    --total-income: #FE7275;
+    --total-expenses: #53A867;
     --bg: white;
     --welcome-color-bg:white;
     --welcome-text:white;
@@ -42,4 +46,7 @@
     --tag-bg: #EFEFEF;
     --button-bg-danger: #E10505;
     --dialog-header-text: white;
+    --list-tag-text: #333;
+    --list-amount-text: var(--amount-text);
+    --list-time-text: var(--date-text);
   }
