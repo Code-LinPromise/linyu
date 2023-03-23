@@ -8,6 +8,9 @@ export const Button = defineComponent({
         level:{
             type:String as PropType<"important" | "default" | "danger">,
             default: 'important'
+        },
+        type:{
+            type:String as PropType<'submit' | 'button'>
         }
     },
   setup: (props, context) => {
