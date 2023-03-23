@@ -2,6 +2,7 @@
     position: relative;
     .navbar{
         position: sticky;
-        top:0
+        top:0;
+        z-index: var(--z-index-navbar);
     }
 }

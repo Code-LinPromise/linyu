@@ -7,6 +7,7 @@ import s from './style.module.scss';
 import { Overlay } from 'vant';
 import { ItemSummary } from '../ItemSummary';
 import { Form, FormItem } from '../../Form';
+import { OverlayIcon } from '../../Overlay';
 export const ItemList = defineComponent({
     props:{
         name:{
@@ -43,7 +44,7 @@ export const ItemList = defineComponent({
     return ()=>(
         <MainLayout>
             {{
-                icon:()=><Icon name="menu" class={s.icon}></Icon>,
+                icon:()=><OverlayIcon />,
                 title:()=><span class={s.font}>山竹记账</span>,
                 default: () => (
                     <>
@@ -85,7 +86,7 @@ export const ItemList = defineComponent({
                                         <FormItem label='结束时间' v-model={customTime.end} type='date' />
                                         <FormItem>
                                             <div class={s.actions}>
-                                                <button type="button">取消</button>
+                                                <button type="button" onClick={()=>refOverlayVisible.value = false}>取消</button>
                                                 <button type="submit">确认</button>
                                             </div>
                                         </FormItem>

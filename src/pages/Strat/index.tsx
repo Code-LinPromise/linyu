@@ -4,7 +4,7 @@ import { FloatButton } from '../../components/FloatButton';
 import s from "./style.module.scss"
 import { Center } from '../../components/Center';
 import { Icon } from '../../components/Icon';
-import { Overlay } from '../../components/Overlay';
+import { Overlay, OverlayIcon } from '../../components/Overlay';
 import { MainLayout } from '../../layouts/MainLayout';
 import { useRouter } from 'vue-router';
 export const Start = defineComponent({
@@ -25,9 +25,7 @@ export const Start = defineComponent({
       <div>
         <MainLayout>
           {{
-            icon: () => (
-              <Icon name="menu" class={s.menuIcon} onClick={setOverlay}></Icon>
-            ),
+            icon: () => <OverlayIcon />,
             title: () => <span class={s.menuFont}>山竹记账</span>,
             default: () => (
               <>

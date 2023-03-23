@@ -7,6 +7,7 @@
     left: 0;
     width: 16em;
     height: calc(100% - var(--top-safe-area-height));
+    color: var(--text);
     >.currentUser {
         padding: 32px 16px;
         background: var(--overlay-user-bg);
@@ -40,3 +41,11 @@
     width: 100%;
     height: calc(100% - var(--top-safe-area-height));
 }
+
+.icon{
+    width: 30px;
+    height: 30px;
+    position: relative;
+    top: 2px;
+    fill: var(--navbar-text-color);
+  }
