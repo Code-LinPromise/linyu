@@ -10,6 +10,7 @@ export const EmojiSelect = defineComponent({
       type: Function as PropType<(emoji: string) => void>
     }
   },
+  
   setup: (props, context) => {
     const refSelected = ref(0)
     const table: [string, string[]][] = [
