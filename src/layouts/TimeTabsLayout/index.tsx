@@ -1,6 +1,7 @@
+import { Overlay } from 'vant';
 import { defineComponent, PropType, reactive, ref } from 'vue';
 import { Form, FormItem } from '../../components/Form';
-import { Overlay, OverlayIcon } from '../../components/Overlay';
+import { OverlayIcon } from '../../components/Overlay';
 import { Tab, Tabs } from '../../components/Tabs';
 import { Time } from '../../hooks/Time';
 import { MainLayout } from '../MainLayout';
@@ -59,7 +60,7 @@ const demo = defineComponent({
       return () => (
         <MainLayout>{
           {
-            title: () => '山竹记账',
+            title: () => <span class={s.font}>山竹记账</span>,
             icon: () => <OverlayIcon />,
             default: () => <>
               <Tabs classPrefix='customTabs' v-model:selected={refSelected.value}
