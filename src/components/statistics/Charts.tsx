@@ -1,8 +1,8 @@
 import { defineComponent, PropType, ref } from 'vue';
-import { FormItem } from '../../shared/Form';
+import { FormItem } from  "./../Form";
 import s from './Charts.module.scss';
-import { LineChart } from './LineChart';
-import { PieChart } from './PieChart';
+import { LineChart } from './LineCharts';
+import { PieChart } from './PieCharts';
 import { Bars } from './Bars';
 
 export const Charts = defineComponent({
