@@ -16,6 +16,7 @@ import { ItemPage } from "../pages/ItemPage"
 import { TagCreate } from "../components/TagCreate"
 import { TagEdit } from "../components/TagEdit"
 import { TagPage } from "../pages/TagPage"
+import { SignInPage } from "../pages/SignInPage"
 export const routes:RouteRecordRaw[]=[
     {
         path:"",redirect:"/welcome"
@@ -46,5 +47,8 @@ export const routes:RouteRecordRaw[]=[
             {path:"create",component:TagCreate},
             {path:":id/edit",component:TagEdit}
         ]
+    },
+    {
+        path:"/sign_in",component:SignInPage,
     }
 ]
