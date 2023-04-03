@@ -1,5 +1,5 @@
 import { defineComponent, onMounted, PropType, ref } from 'vue';
-import s from './LineChart.module.scss';
+import s from './LineCharts.module.scss';
 import * as echarts from 'echarts';
 export const LineChart = defineComponent({
   setup: (props, context) => {

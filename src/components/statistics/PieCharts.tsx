@@ -1,5 +1,5 @@
 import { defineComponent, onMounted, PropType, ref } from 'vue';
-import s from './PieChart.module.scss';
+import s from './PieCharts.module.scss';
 import * as echarts from 'echarts';
 export const PieChart = defineComponent({
   props: {
