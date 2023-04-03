@@ -1,6 +1,6 @@
 import { Form } from '../../components/Form';
 import { Button } from '../../components/Button';
-import { defineComponent, PropType, reactive } from 'vue';
+import { defineComponent, PropType, reactive, ref } from 'vue';
 import { FormItem } from '../../components/Form';
 import { Icon } from '../../components/Icon';
 import { MainLayout } from '../../layouts/MainLayout';
@@ -21,6 +21,7 @@ export const SignInPage = defineComponent({
           email: [],
           code: []
         })
+        const refValidationCode = ref<any>()
         const onSubmit = (e: Event) => {
           e.preventDefault()
           Object.assign(errors, {
@@ -32,8 +33,8 @@ export const SignInPage = defineComponent({
             { key: 'code', type: 'required', message: '必填' },
           ]))
         }
-        const onClickSendValidationCode=()=>{
-          console.log('111')
+        const onClickSendValidationCode=async()=>{
+          refValidationCode.value.startCount()
         }
         return () => (
           <MainLayout>{
@@ -51,6 +52,8 @@ export const SignInPage = defineComponent({
                       placeholder='请输入邮箱，然后点击发送验证码'
                       v-model={formData.email} error={errors.email?.[0]} />
                     <FormItem label="验证码" type="validationCode"
+                      ref={refValidationCode}
+                      countFrom={60}
                       placeholder='请输入六位数字' onClick={onClickSendValidationCode}
                       v-model={formData.code} error={errors.code?.[0]} />
                     <FormItem style={{ paddingTop: '96px' }}>
