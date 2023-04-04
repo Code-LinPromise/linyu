@@ -5,6 +5,7 @@ import { FormItem } from '../../components/Form';
 import { Icon } from '../../components/Icon';
 import { MainLayout } from '../../layouts/MainLayout';
 import { hasError,validate } from '../../shared/validata';
+import { useRoute, useRouter } from 'vue-router';
 import { http } from '../../shared/Http';
 import { useBool } from '../../shared/useBool';
 import s from './style.module.scss';
@@ -24,6 +25,8 @@ export const SignInPage = defineComponent({
           code: []
         })
         const refValidationCode = ref<any>()
+        const router = useRouter()
+        const route = useRoute()
         const { ref: refDisabled, toggle, on: disabled, off: enable } = useBool(false)
         const onSubmit = async (e: Event) => {
           e.preventDefault()
@@ -36,7 +39,11 @@ export const SignInPage = defineComponent({
             { key: 'code', type: 'required', message: '必填' },
           ]))
           if(!hasError(errors)){
-            const response = await http.post('/session', formData)
+            const response = await http.post<{jwt:string}>('/session', formData)
+            console.log(response.data.jwt)
+            localStorage.setItem('jwt', response.data.jwt)
+            const returnTo = route.query.return_to?.toString()
+            router.push(returnTo || '/')
           }
         }
         const onError=(error:any)=>{
