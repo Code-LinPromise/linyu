@@ -5,6 +5,7 @@ import { FormItem } from '../../components/Form';
 import { Icon } from '../../components/Icon';
 import { MainLayout } from '../../layouts/MainLayout';
 import { validate } from '../../shared/validata';
+import { http } from '../../shared/Http';
 import s from './style.module.scss';
 export const SignInPage = defineComponent({
     props:{
@@ -14,7 +15,7 @@ export const SignInPage = defineComponent({
     },
         setup: (props, context) => {
         const formData = reactive({
-          email: '',
+          email: '326661445@qq.com',
           code: ''
         })
         const errors = reactive({
@@ -33,7 +34,15 @@ export const SignInPage = defineComponent({
             { key: 'code', type: 'required', message: '必填' },
           ]))
         }
+        const onError=(error:any)=>{
+          if(error.response.status===422){
+            Object.assign(errors,error.response.data.errors)
+          }
+        }
         const onClickSendValidationCode=async()=>{
+
+          const response=await http.post('/validation_codes',{email:formData.email})
+          .catch(onError)
           refValidationCode.value.startCount()
         }
         return () => (
@@ -53,7 +62,7 @@ export const SignInPage = defineComponent({
                       v-model={formData.email} error={errors.email?.[0]} />
                     <FormItem label="验证码" type="validationCode"
                       ref={refValidationCode}
-                      countFrom={60}
+                      countFrom={1}
                       placeholder='请输入六位数字' onClick={onClickSendValidationCode}
                       v-model={formData.code} error={errors.code?.[0]} />
                     <FormItem style={{ paddingTop: '96px' }}>
