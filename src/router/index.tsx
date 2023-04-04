@@ -18,6 +18,7 @@ import { TagEdit } from "../components/TagEdit"
 import { TagPage } from "../pages/TagPage"
 import { SignInPage } from "../pages/SignInPage"
 import { StatisticsPage } from "../pages/StatisticsPage"
+import { http } from "../shared/Http"
 export const routes:RouteRecordRaw[]=[
     {
         path:"",redirect:"/welcome"
@@ -40,6 +41,12 @@ export const routes:RouteRecordRaw[]=[
     },
     {
         path:"/item" ,component:ItemPage,
+        beforeEnter: async (to, from, next) => {
+            await http.get('/me').catch(() => {
+              next('/sign_in?return_to=' + to.path)
+            })
+            next()
+          },
         children:[
             {path:"list",component:ItemList},
             {path:"create",component:ItemCreate},
