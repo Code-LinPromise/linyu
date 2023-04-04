@@ -40,7 +40,6 @@ export const SignInPage = defineComponent({
           ]))
           if(!hasError(errors)){
             const response = await http.post<{jwt:string}>('/session', formData)
-            console.log(response.data.jwt)
             localStorage.setItem('jwt', response.data.jwt)
             const returnTo = route.query.return_to?.toString()
             router.push(returnTo || '/')
