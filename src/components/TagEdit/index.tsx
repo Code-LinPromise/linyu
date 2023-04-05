@@ -6,8 +6,14 @@ import { Button } from '../Button';
 import { Rules, validate } from '../../shared/validata';
 import { TagForm } from '../TagForm';
 import { BackIcon } from '../BackIcon';
+import { useRoute } from 'vue-router';
 export const TagEdit = defineComponent({
   setup: (props, context) => {
+    const route = useRoute()
+    const numberId = parseInt(route.params.id!.toString())
+    if(Number.isNaN(numberId)){
+      return ()=> <div>id 不存在</div>
+    }
     const formData = reactive({
       name: '',
       sign: '',
@@ -28,10 +34,10 @@ export const TagEdit = defineComponent({
     }
     return () => (
       <MainLayout>{{
-        title: () => <span class={s.font}>新建标签</span>,
+        title: () => <span class={s.font}>编辑标签</span>,
         icon: () => <BackIcon class={s.icon}/>,
         default: () => <>
-          <TagForm />
+          <TagForm id={numberId}/>
           <div class={s.actions}>
             <Button level='danger' class={s.removeTags} onClick={() => { }}>删除标签</Button>
             <Button level='danger' class={s.removeTagsAndItems} onClick={() => { }}>删除标签和记账</Button>

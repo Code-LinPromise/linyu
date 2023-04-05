@@ -15,6 +15,7 @@ export const Tags = defineComponent({
   },
   emits: ['update:selected'],
   setup: (props, context) => {
+    
     const onSelect = (tag: Tag) => {
       context.emit('update:selected', tag.id)
     }
