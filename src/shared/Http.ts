@@ -1,5 +1,5 @@
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { mockSession } from "../mock/mock";
+import { mockSession, mockTagIndex } from "../mock/mock";
 
 type GetConfig = Omit<AxiosRequestConfig, 'params' | 'url' | 'method'>
 type PostConfig = Omit<AxiosRequestConfig, 'url' | 'data' | 'method'>
@@ -38,14 +38,7 @@ const mock = (response: AxiosResponse) => {
     case 'tagIndex':
       [response.status, response.data] = mockTagIndex(response.config)
       return true
-    case 'itemCreate':
-      [response.status, response.data] = mockItemCreate(response.config)
-      return true
-    case 'itemIndex':
-      [response.status, response.data] = mockItemIndex(response.config)
-      return true
-    case 'tagCreate':
-      [response.status, response.data] = mockTagCreate(response.config)
+    
     case 'session':
       [response.status, response.data] = mockSession(response.config)
       return true
@@ -56,7 +49,10 @@ const mock = (response: AxiosResponse) => {
 export const http =new Http('/api/v1')
 
 http.instance.interceptors.request.use(config => {
-  
+  const jwt = localStorage.getItem('jwt')
+  if (jwt) {
+    config.headers!.Authorization = `Bearer ${jwt}`
+  }
   return config
 })
 
