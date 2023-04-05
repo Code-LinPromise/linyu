@@ -10,6 +10,7 @@ import { http } from '../../shared/Http';
 import { refreshMe } from '../../shared/me';
 import { useBool } from '../../shared/useBool';
 import s from './style.module.scss';
+import { BackIcon } from '../../components/BackIcon';
 export const SignInPage = defineComponent({
     props:{
         name:{
@@ -64,7 +65,7 @@ export const SignInPage = defineComponent({
           <MainLayout>{
             {
               title: () => <span class={s.font}>登录</span>,
-              icon: () => <Icon name="left"  class={s.icon}/>,
+              icon: () => <BackIcon  class={s.icon}/>,
               default: () => (
                 <div class={s.wrapper}>
                   <div class={s.logo}>

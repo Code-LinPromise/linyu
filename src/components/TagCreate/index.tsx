@@ -6,6 +6,7 @@ import { Button } from '../Button';
 import { EmojiSelect } from '../emojiSelect';
 import { Rules, validate } from '../../shared/validata';
 import { TagForm } from '../TagForm';
+import { BackIcon } from '../BackIcon';
 export const TagCreate = defineComponent({
   setup: (props, context) => {
     const formData = reactive({
@@ -29,7 +30,7 @@ export const TagCreate = defineComponent({
     return () => (
       <MainLayout>{{
         title: () => <span class={s.font}>新建标签</span>,
-        icon: () => <Icon name="left" onClick={() => { }}  class={s.icon}/>,
+        icon: () => <BackIcon  class={s.icon}/>,
         default: () => (
           <TagForm />
         )

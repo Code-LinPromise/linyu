@@ -19,7 +19,7 @@ export const Start = defineComponent({
         isShow.value=false
     }
     const goItemCreate=()=>{
-        router.push("/item/create")
+        router.push("/items/create")
     }
     return () => (
       <div>

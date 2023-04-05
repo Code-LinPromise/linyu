@@ -9,6 +9,7 @@ import s from './style.module.scss';
 import { InputPad } from '../../InputPad';
 import { http } from '../../../shared/Http';
 import { Tags } from '../Tags';
+import { BackIcon } from '../../BackIcon';
 export const ItemCreate = defineComponent({
   setup: (props, context) => {
     const router=useRouter()
@@ -42,7 +43,7 @@ export const ItemCreate = defineComponent({
     return () => (
 		<MainLayout>
 			{{
-				icon: () => <Icon name="left" class={s.menuIcon} onClick={back}></Icon>,
+				icon: () => <BackIcon  class={s.menuIcon}></BackIcon>,
 				title: () => <span class={s.menuFont}>记一笔</span>,
 				default: () => (
 					<>
