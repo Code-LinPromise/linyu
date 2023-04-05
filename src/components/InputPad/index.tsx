@@ -5,9 +5,10 @@ import { Time } from '../../hooks/Time';
 import { DatetimePicker, NumberKeyboard, Popup } from 'vant';
 export const InputPad = defineComponent({
     props:{
-        name:{
-            type:String as PropType<string>
-        }
+      happenAt:{
+        type: String,
+      },
+      amount: Number
     },
    setup: (props, context) => {
     const appendText = (n: number | string) => {
@@ -49,24 +50,27 @@ export const InputPad = defineComponent({
         { text: '.', onClick: () => {appendText(".") } },
         { text: '0', onClick: () => {appendText(0)  } },
         { text: '清空', onClick: () => {refAmount.value="0" }},
-        { text: '提交', onClick: () => { } },
+        { text: '提交', onClick: () => context.emit('update:amount',
+        parseFloat(refAmount.value) * 100) },
     ]
     const refDatePickerVisible = ref(false)
     const showDatePicker = () => refDatePickerVisible.value = true
     const hideDatePicker = () => refDatePickerVisible.value = false
-    const setDate = (date: Date) => { refDate.value = date; hideDatePicker() }
-    const now = new Date()
-    const refDate = ref<Date>(now)
-    const refAmount = ref('0')
+    const setDate = (date: Date) => {
+      context.emit('update:happenAt', date.toISOString());
+      hideDatePicker()
+    }
+    const refAmount = ref(props.amount ? (props.amount / 100).toString() : '0')
+    
     return ()=>(
         <div class={s.wrapper}>
             <div class={s.timeAndAmount}>
                 <span class={s.iconAndTime} onClick={showDatePicker}>
                     <Icon name="date" class={s.dateIcon}></Icon>
-                    <span onClick={showDatePicker} class={s.time}>{new Time(refDate.value).format()}</span>
+                    <span onClick={showDatePicker} class={s.time}>{new Time(props.happenAt).format()}</span>
                 </span>
                 <Popup position='bottom' v-model:show={refDatePickerVisible.value} >
-                    <DatetimePicker value={refDate.value} type="date" title="选择年月日"
+                    <DatetimePicker value={props.happenAt} type="date" title="选择年月日"
                         onConfirm={setDate} onCancel={hideDatePicker}
                     />
                 </Popup>

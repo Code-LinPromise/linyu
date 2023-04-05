@@ -16,6 +16,7 @@ type Tag = {
   name: string,
   sign: string,
   kind: expenses | income
+
 }
 
 type Resources<T = any> = {
@@ -25,4 +26,5 @@ type Resources<T = any> = {
     per_page: number,
     count: number
   }
+
 }
