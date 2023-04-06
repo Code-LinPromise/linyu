@@ -25,7 +25,7 @@ export const Tags = defineComponent({
         page: page + 1,
         
       },{
-        _mock: 'tagIndex'
+        _mock: 'tagIndex', _autoLoading: true
       })
     })
     const timer = ref<number>()
