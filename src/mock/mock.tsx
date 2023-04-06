@@ -5,6 +5,15 @@ type Mock = (config: AxiosRequestConfig) => [number, any]
 
 faker.setLocale('zh_CN');
 
+const createTag = (attrs?: any) =>
+    ({
+      id: createId(),
+      name: faker.lorem.word(),
+      sign: faker.internet.emoji(),
+      kind: 'expenses',
+      ...attrs
+    })
+
 export const mockItemIndexBalance: Mock = config => {
   return [200, {
     expenses: 9900,
@@ -28,6 +37,7 @@ export const mockItemIndex: Mock = (config) => {
       user_id: createId(),
       amount: Math.floor(Math.random() * 10000),
       tags_id: [createId()],
+      tags: [createTag()],
       happen_at: faker.date.past().toISOString(),
       kind: config.params.kind,
     }))
