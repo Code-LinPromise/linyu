@@ -19,6 +19,7 @@ import { TagPage } from "../pages/TagPage"
 import { SignInPage } from "../pages/SignInPage"
 import { StatisticsPage } from "../pages/StatisticsPage"
 import { http } from "../shared/Http"
+import { ComingSoon } from "../pages/ComingSoon"
 export const routes:RouteRecordRaw[]=[
     {
         path:"",redirect:"/welcome"
@@ -58,5 +59,11 @@ export const routes:RouteRecordRaw[]=[
     },
     {
         path: '/statistics', component: StatisticsPage
+    }
+    ,{
+        path: '/export', component: ComingSoon
+    }
+    ,{
+        path: '/notify', component: ComingSoon
     }
 ]
