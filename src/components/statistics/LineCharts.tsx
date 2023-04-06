@@ -46,7 +46,7 @@ export const LineChart = defineComponent({
     }
   },
   setup: (props, context) => {
-    console.log(props.data)
+    
     const refDiv = ref<HTMLDivElement>()
     let lineChart:echarts.ECharts| undefined = undefined
     onMounted(() => {

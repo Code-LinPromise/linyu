@@ -5,7 +5,9 @@ import s from './style.module.scss';
 export const StatisticsPage = defineComponent({
     setup: (props, context) => {
       return () => (
-        <TimeTabsLayout component={Charts}  rerenderOnSwitchTab={true}/>
+        <TimeTabsLayout component={Charts}  rerenderOnSwitchTab={true}
+          hideThisYear={true}
+        />
       )
     }
   })
