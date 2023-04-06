@@ -41,7 +41,11 @@
     width: 100%;
     height: calc(100% - var(--top-safe-area-height));
 }
-
+.email{
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 .icon{
     width: 30px;
     height: 30px;
