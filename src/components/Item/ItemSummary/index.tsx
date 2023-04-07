@@ -4,7 +4,9 @@ import { FloatButton } from '../../FloatButton';
 import { http } from '../../../shared/Http';
 import { Button } from '../../Button';
 import { Money } from '../../../shared/Money';
+import { useAfterMe } from '../../../hooks/useAfterMe';
 import { Datetime } from '../../../shared/DateTime';
+import { useMeStore } from '../../../stores/useMeStore';
 export const ItemSummary = defineComponent({
     props: {
       startDate: {
@@ -48,7 +50,7 @@ export const ItemSummary = defineComponent({
       hasMore.value = (pager.page - 1) * pager.per_page + resources.length < pager.count
       page.value += 1
     }
-    onMounted(fetchItems)
+    useAfterMe(fetchItems)
     const fetchItemsBalance=(async ()=>{
       if(!props.startDate || !props.endDate){ return }
       const response = await http.get('/items/balance', {
@@ -59,7 +61,7 @@ export const ItemSummary = defineComponent({
       },{_mock: 'itemIndexBalance',})
       Object.assign(itemsBalance, response.data)
     })
-    onMounted(fetchItemsBalance)
+    useAfterMe(fetchItemsBalance)
     return () => (
       <div class={s.wrapper}>
         {items.value ? (
