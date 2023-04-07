@@ -7,6 +7,7 @@ import { Money } from '../../../shared/Money';
 import { useAfterMe } from '../../../hooks/useAfterMe';
 import { Datetime } from '../../../shared/DateTime';
 import { useMeStore } from '../../../stores/useMeStore';
+import { useItemStore } from '../../../stores/useItemStore';
 export const ItemSummary = defineComponent({
     props: {
       startDate: {
@@ -19,23 +20,13 @@ export const ItemSummary = defineComponent({
       }
     },
     setup: (props, context) => {
+    if (!props.startDate || !props.endDate) {
+      return () => <div>请先选择时间范围</div>}
     const items = ref<Item[]>([])
     const hasMore = ref(false)
     const page = ref(0)
     const itemsBalance = reactive({
       expenses: 0, income: 0, balance: 0
-    })
-    watch(()=>[props.startDate,props.endDate], ()=>{
-      items.value = []
-      hasMore.value = false
-      page.value = 0
-      fetchItems()
-    })
-    watch(()=>[props.startDate,props.endDate], ()=>{
-      Object.assign(itemsBalance, {
-        expenses: 0, income: 0, balance: 0
-      })
-      fetchItemsBalance()
     })
     const fetchItems = async () => {
       if(!props.startDate || !props.endDate){ return }
@@ -51,6 +42,20 @@ export const ItemSummary = defineComponent({
       page.value += 1
     }
     useAfterMe(fetchItems)
+    const itemStore = useItemStore(['items', props.startDate, props.endDate])
+    watch(()=>[props.startDate,props.endDate], ()=>{
+      itemStore.$reset()
+      itemStore.fetchItems()
+    })
+    watch(()=>[props.startDate,props.endDate], ()=>{
+      Object.assign(itemsBalance, {
+        expenses: 0,
+        income: 0,
+        balance: 0
+      })
+      fetchItemsBalance()
+    })
+    
     const fetchItemsBalance=(async ()=>{
       if(!props.startDate || !props.endDate){ return }
       const response = await http.get('/items/balance', {
@@ -64,7 +69,7 @@ export const ItemSummary = defineComponent({
     useAfterMe(fetchItemsBalance)
     return () => (
       <div class={s.wrapper}>
-        {items.value ? (
+        {itemStore.items && itemStore.items.length > 0 ? (
           <>
             <ul class={s.total}>
               <li>
@@ -81,7 +86,7 @@ export const ItemSummary = defineComponent({
               </li>
             </ul>
             <ol class={s.list}>
-              {items.value.map((item) => (
+              {itemStore.items.map((item) => (
                 <li>
                   <div class={s.sign}>
                   <span>{item.tags && item.tags.length > 0 ? item.tags[0].sign : '💰'}</span>
