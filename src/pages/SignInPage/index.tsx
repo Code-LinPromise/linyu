@@ -10,6 +10,7 @@ import { http } from '../../shared/Http';
 import { refreshMe } from '../../shared/me';
 import { useBool } from '../../shared/useBool';
 import s from './style.module.scss';
+import { useMeStore } from '../../stores/useMeStore';
 import { BackIcon } from '../../components/BackIcon';
 export const SignInPage = defineComponent({
     props:{
@@ -29,6 +30,7 @@ export const SignInPage = defineComponent({
         const refValidationCode = ref<any>()
         const router = useRouter()
         const route = useRoute()
+        const meStore = useMeStore()
         const { ref: refDisabled, toggle, on: disabled, off: enable } = useBool(false)
         const onSubmit = async (e: Event) => {
           e.preventDefault()
@@ -44,7 +46,7 @@ export const SignInPage = defineComponent({
             const response = await http.post<{jwt:string}>('/session', formData)
             localStorage.setItem('jwt', response.data.jwt)
             const returnTo = route.query.return_to?.toString()
-            refreshMe()
+            meStore.refreshMe()
             router.push(returnTo || '/')
           }
         }

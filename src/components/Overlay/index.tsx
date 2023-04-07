@@ -4,6 +4,7 @@ import s from './style.module.scss';
 import { RouterLink, useRoute, useRouter } from 'vue-router';
 import { mePromise } from '../../shared/me';
 import { Dialog } from 'vant';
+import { useMeStore } from '../../stores/useMeStore';
 export const Overlay = defineComponent({
   props: {
     close:{
@@ -13,11 +14,12 @@ export const Overlay = defineComponent({
     
   },
   setup: (props, context) => {
+    const meStore = useMeStore()
     const route = useRoute()
     const router =useRouter()
     const user = ref<User>()
     onMounted(async () => {
-      const response = await mePromise
+      const response = await meStore.mePromise
       user.value = response?.data.resource
     })
     const onSignOut = async () => {

@@ -2,10 +2,11 @@ import { createApp } from 'vue'
 import { App } from './App'
 import { history } from './shared/history'
 import {createRouter} from "vue-router"
-import { fetchMe, mePromise } from './shared/me';
+import { fetchMe, } from './shared/me';
 import { routes } from './router'
 import '@svgstore';
-
+import { createPinia } from 'pinia';
+import { useMeStore } from './stores/useMeStore';
 
 
 const router=createRouter({
@@ -22,6 +23,14 @@ const whiteList: Record<string, 'exact' | 'startsWith'> = {
   '/sign_in': 'startsWith',
 }
 
+
+const pinia = createPinia()
+
+createApp(App).use(router).use(pinia).mount('#app')
+
+const meStore = useMeStore()
+meStore.fetchMe()
+
 router.beforeEach((to, from) => {
   for (const key in whiteList) {
     const value = whiteList[key]
@@ -32,11 +41,8 @@ router.beforeEach((to, from) => {
       return true
     }
   }
-  return mePromise!.then(
+  return meStore.mePromise!.then(
     () => true,
     () => '/sign_in?return_to=' + to.path
   )
 })
-
-
-createApp(App).use(router).mount('#app')
