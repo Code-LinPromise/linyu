@@ -20,32 +20,16 @@ export const ItemSummary = defineComponent({
       }
     },
     setup: (props, context) => {
-    if (!props.startDate || !props.endDate) {
-      return () => <div>请先选择时间范围</div>}
-    const items = ref<Item[]>([])
-    const hasMore = ref(false)
+    
     const page = ref(0)
     const itemsBalance = reactive({
       expenses: 0, income: 0, balance: 0
     })
-    const fetchItems = async () => {
-      if(!props.startDate || !props.endDate){ return }
-      const response = await http.get<Resources<Item>>('/items', {
-        happen_after: props.startDate,
-        happen_before: props.endDate,
-        page: page.value + 1,
-        
-      },{_mock: 'itemIndex', _autoLoading: true})
-      const { resources, pager } = response.data
-      items.value?.push(...resources)
-      hasMore.value = (pager.page - 1) * pager.per_page + resources.length < pager.count
-      page.value += 1
-    }
-    useAfterMe(fetchItems)
     const itemStore = useItemStore(['items', props.startDate, props.endDate])
+    useAfterMe(() => itemStore.fetchItems(props.startDate, props.endDate))
     watch(()=>[props.startDate,props.endDate], ()=>{
       itemStore.$reset()
-      itemStore.fetchItems()
+      itemStore.fetchItems(props.startDate, props.endDate)
     })
     watch(()=>[props.startDate,props.endDate], ()=>{
       Object.assign(itemsBalance, {
@@ -67,7 +51,9 @@ export const ItemSummary = defineComponent({
       Object.assign(itemsBalance, response.data)
     })
     useAfterMe(fetchItemsBalance)
-    return () => (
+    return () =>!props.startDate || !props.endDate ? (
+      <div>请先选择时间范围</div>
+    ): (
       <div class={s.wrapper}>
         {itemStore.items && itemStore.items.length > 0 ? (
           <>
