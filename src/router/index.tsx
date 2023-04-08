@@ -1,6 +1,5 @@
 
 import {RouteRecordRaw} from "vue-router"
-import { Welcome } from '../components/Welcome'
 import { Welcome1 } from '../components/Welcome1'
 import { Welcome2 } from '../components/Welcome2'
 import { Welcome3 } from '../components/Welcome3'
@@ -9,26 +8,19 @@ import { WelcomeAction1 } from "../components/WelcomeAction1"
 import { WelcomeAction2 } from "../components/WelcomeAction2"
 import { WelcomeAction3 } from "../components/WelcomeAction3"
 import { WelcomeAction4 } from "../components/WelcomeAction4"
-import { Start } from "../pages/Strat"
 import { ItemList } from "../components/Item/ItemList"
 import { ItemCreate } from "../components/Item/ItemCreate"
-import { ItemPage } from "../pages/ItemPage"
 import { TagCreate } from "../components/TagCreate"
 import { TagEdit } from "../components/TagEdit"
-import { TagPage } from "../pages/TagPage"
-import { SignInPage } from "../pages/SignInPage"
-import { StatisticsPage } from "../pages/StatisticsPage"
-import { http } from "../shared/Http"
-import { ComingSoon } from "../pages/ComingSoon"
 export const routes:RouteRecordRaw[]=[
     {
         path:"",redirect:"/welcome"
     },
     {
-        path:"/start",component:Start
+        path:"/start",component:import("../pages/Strat")
     },
     {
-        path:"/welcome",component:Welcome,
+        path:"/welcome",component:import('../components/Welcome'),
         beforeEnter: (to, from, next) => {
             localStorage.getItem('skipFeatures') === 'yes' ? next('/start') : next()
           },
@@ -41,29 +33,29 @@ export const routes:RouteRecordRaw[]=[
         ]
     },
     {
-        path:"/items" ,component:ItemPage,
+        path:"/items" ,component:import("../pages/ItemPage"),
         children:[
             {path:"",component:ItemList},
             {path:"create",component:ItemCreate},
         ]
     },
     {
-        path:"/tags",component:TagPage,
+        path:"/tags",component:import("../pages/TagPage"),
         children:[
             {path:"create",component:TagCreate},
             {path:":id/edit",component:TagEdit}
         ]
     },
     {
-        path:"/sign_in",component:SignInPage,
+        path:"/sign_in",component:import("../pages/SignInPage"),
     },
     {
-        path: '/statistics', component: StatisticsPage
+        path: '/statistics', component: import("../pages/StatisticsPage")
     }
     ,{
-        path: '/export', component: ComingSoon
+        path: '/export', component: import("../pages/ComingSoon")
     }
     ,{
-        path: '/notify', component: ComingSoon
+        path: '/notify', component: import("../pages/ComingSoon")
     }
 ]

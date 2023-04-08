@@ -21,6 +21,7 @@ export const Start = defineComponent({
     const goItemCreate=()=>{
         router.push("/items/create")
     }
+    
     return () => (
       <div>
         <MainLayout>
@@ -33,7 +34,7 @@ export const Start = defineComponent({
                   <Icon name="piggy" class={s.icon}></Icon>
                 </Center>
                 <div class={s.box}>
-                  <Button class={s.button}>开始记账</Button>
+                  <Button class={s.button} onClick={goItemCreate}>开始记账</Button>
                 </div>
                 {isShow.value && <Overlay close={closeOverlay}></Overlay>}
                 <FloatButton goItemCreate={goItemCreate}></FloatButton>
@@ -45,3 +46,5 @@ export const Start = defineComponent({
     );
   }
 })
+
+export default Start
