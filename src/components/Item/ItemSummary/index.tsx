@@ -9,6 +9,7 @@ import { Datetime } from '../../../shared/DateTime';
 import { useMeStore } from '../../../stores/useMeStore';
 import { useItemStore } from '../../../stores/useItemStore';
 import { Icon } from '../../Icon';
+import { useRouter } from 'vue-router';
 export const ItemSummary = defineComponent({
     props: {
       startDate: {
@@ -21,7 +22,7 @@ export const ItemSummary = defineComponent({
       }
     },
     setup: (props, context) => {
-    
+    const router =useRouter()
     const page = ref(0)
     const itemsBalance = reactive({
       expenses: 0, income: 0, balance: 0
@@ -46,8 +47,6 @@ export const ItemSummary = defineComponent({
       const response = await http.get('/items/balance', {
         happen_after: props.startDate,
         happen_before: props.endDate,
-        page: page.value + 1,
-        
       },{_mock: 'itemIndexBalance',})
       Object.assign(itemsBalance, response.data)
     })
@@ -101,7 +100,7 @@ export const ItemSummary = defineComponent({
             <span>记录为空</span>
             </div>
         )}
-        <FloatButton  />
+        <FloatButton goItemCreate={()=>{router.push('items/create')}} />
       </div>
     )
   },

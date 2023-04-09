@@ -2,7 +2,7 @@ import { createApp } from 'vue'
 import { App } from './App'
 import { history } from './shared/history'
 import {createRouter} from "vue-router"
-import { fetchMe, } from './shared/me';
+
 import { routes } from './router'
 import '@svgstore';
 import { createPinia, storeToRefs } from 'pinia';
@@ -13,8 +13,10 @@ const router=createRouter({
     history,
     routes
 })
+const pinia = createPinia()
 
-fetchMe()
+createApp(App).use(router).use(pinia).mount('#app')
+
 
 const whiteList: Record<string, 'exact' | 'startsWith'> = {
   '/': 'exact',
@@ -22,11 +24,6 @@ const whiteList: Record<string, 'exact' | 'startsWith'> = {
   '/welcome': 'startsWith',
   '/sign_in': 'startsWith',
 }
-
-
-const pinia = createPinia()
-
-createApp(App).use(router).use(pinia).mount('#app')
 
 const meStore = useMeStore()
 const {mePromise} = storeToRefs(meStore)

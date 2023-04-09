@@ -12,12 +12,10 @@ import { ItemList } from "../components/Item/ItemList"
 import { ItemCreate } from "../components/Item/ItemCreate"
 import { TagCreate } from "../components/TagCreate"
 import { TagEdit } from "../components/TagEdit"
+import ComingSoon from "../pages/ComingSoon"
 export const routes:RouteRecordRaw[]=[
     {
         path:"",redirect:"/welcome"
-    },
-    {
-        path:"/start",component:()=>import("../pages/Strat")
     },
     {
         path:"/welcome",component:()=>import('../components/Welcome'),
@@ -32,6 +30,10 @@ export const routes:RouteRecordRaw[]=[
             {path:"4",name:"welcome4",components:{main:Welcome4,footer:WelcomeAction4}},
         ]
     },
+    {
+        path:"/start",component:()=>import("../pages/Strat")
+    },
+    
     {
         path:"/items" ,component:()=>import("../pages/ItemPage"),
         children:[
@@ -56,6 +58,6 @@ export const routes:RouteRecordRaw[]=[
         path: '/export', component:()=> import("../pages/ComingSoon")
     }
     ,{
-        path: '/notify', component:()=> import("../pages/ComingSoon")
+        path: '/notify', component:()=> ComingSoon
     }
 ]

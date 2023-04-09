@@ -7,7 +7,7 @@ import { MainLayout } from '../../layouts/MainLayout';
 import { hasError,validate } from '../../shared/validata';
 import { useRoute, useRouter } from 'vue-router';
 import { http } from '../../shared/Http';
-import { refreshMe } from '../../shared/me';
+
 import { useBool } from '../../shared/useBool';
 import s from './style.module.scss';
 import { useMeStore } from '../../stores/useMeStore';

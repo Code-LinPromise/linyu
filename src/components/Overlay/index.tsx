@@ -2,7 +2,6 @@ import { defineComponent, onMounted, PropType, ref } from 'vue';
 import { Icon } from '../Icon';
 import s from './style.module.scss';
 import { RouterLink, useRoute, useRouter } from 'vue-router';
-import { mePromise } from '../../shared/me';
 import { Dialog } from 'vant';
 import { useMeStore } from '../../stores/useMeStore';
 export const Overlay = defineComponent({
