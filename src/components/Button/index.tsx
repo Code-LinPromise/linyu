@@ -3,7 +3,7 @@ import s from "./style.module.scss"
 export const Button = defineComponent({
     props:{
         onClick:{
-            type:Function as PropType<(e:MouseEvent)=>void>    
+            type:Function as PropType<()=>void>    
         },
         level:{
             type:String as PropType<"important" | "default" | "danger">,

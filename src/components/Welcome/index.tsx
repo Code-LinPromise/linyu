@@ -32,7 +32,7 @@ export const Welcome = defineComponent({
     <div class={s.wrapper}>
         <header class={s.header}>
             <Icon name="mangosteen"></Icon>
-            <h1 class={s.font}>山竹记账</h1>
+            <h1 class={s.font}>林语记账</h1>
         </header>
         <main class={s.main} ref={main} >
             <RouterView name='main'>
