@@ -27,7 +27,7 @@ export const Start = defineComponent({
         <MainLayout>
           {{
             icon: () => <OverlayIcon />,
-            title: () => <span class={s.menuFont}>林语记账</span>,
+            title: () => <span class={s.menuFont}>淋语记账</span>,
             default: () => (
               <>
                 <Center direction="vertical" class={s.icon_wrapper}>

@@ -8,6 +8,7 @@ import { useAfterMe } from '../../../hooks/useAfterMe';
 import { Datetime } from '../../../shared/DateTime';
 import { useMeStore } from '../../../stores/useMeStore';
 import { useItemStore } from '../../../stores/useItemStore';
+import { Icon } from '../../Icon';
 export const ItemSummary = defineComponent({
     props: {
       startDate: {
@@ -95,7 +96,10 @@ export const ItemSummary = defineComponent({
             </div>
           </>
         ) : (
-          <div>记录为空</div>
+          <div class={s.none}>
+            <Icon name={"piggy"}></Icon>
+            <span>记录为空</span>
+            </div>
         )}
         <FloatButton  />
       </div>

@@ -27,7 +27,7 @@ export class Http {
   }
 }
 
-export const http = new Http(DEBUG ? 'api/v1' : 'http://47.109.69.126/:3000/api/v1')
+export const http = new Http(DEBUG ? 'api/v1' : 'http://47.109.69.126:3000/api/v1')
 
 http.instance.interceptors.request.use((config) => {
   const jwt = localStorage.getItem('jwt')
@@ -59,7 +59,7 @@ http.instance.interceptors.response.use(
   }
 )
 
-if (DEBUG) {
+if (false) {
   import('../mock/mock').then(
     ({
       mockItemCreate,

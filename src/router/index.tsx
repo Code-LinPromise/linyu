@@ -17,10 +17,10 @@ export const routes:RouteRecordRaw[]=[
         path:"",redirect:"/welcome"
     },
     {
-        path:"/start",component:import("../pages/Strat")
+        path:"/start",component:()=>import("../pages/Strat")
     },
     {
-        path:"/welcome",component:import('../components/Welcome'),
+        path:"/welcome",component:()=>import('../components/Welcome'),
         beforeEnter: (to, from, next) => {
             localStorage.getItem('skipFeatures') === 'yes' ? next('/start') : next()
           },
@@ -33,29 +33,29 @@ export const routes:RouteRecordRaw[]=[
         ]
     },
     {
-        path:"/items" ,component:import("../pages/ItemPage"),
+        path:"/items" ,component:()=>import("../pages/ItemPage"),
         children:[
             {path:"",component:ItemList},
             {path:"create",component:ItemCreate},
         ]
     },
     {
-        path:"/tags",component:import("../pages/TagPage"),
+        path:"/tags",component:()=>import("../pages/TagPage"),
         children:[
             {path:"create",component:TagCreate},
             {path:":id/edit",component:TagEdit}
         ]
     },
     {
-        path:"/sign_in",component:import("../pages/SignInPage"),
+        path:"/sign_in",component:()=>import("../pages/SignInPage"),
     },
     {
-        path: '/statistics', component: import("../pages/StatisticsPage")
+        path: '/statistics', component: ()=>import("../pages/StatisticsPage")
     }
     ,{
-        path: '/export', component: import("../pages/ComingSoon")
+        path: '/export', component:()=> import("../pages/ComingSoon")
     }
     ,{
-        path: '/notify', component: import("../pages/ComingSoon")
+        path: '/notify', component:()=> import("../pages/ComingSoon")
     }
 ]

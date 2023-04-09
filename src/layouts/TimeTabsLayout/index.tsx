@@ -74,7 +74,7 @@ const demo = defineComponent({
       return () => (
         <MainLayout>{
           {
-            title: () => <span class={s.font}>林语记账</span>,
+            title: () => <span class={s.font}>淋语记账</span>,
             icon: () => <OverlayIcon />,
             default: () => (
               <>
